@@ -15,13 +15,15 @@ define(['../lib/csvreport'],
 				const body = params.body;
 				log.debug('params', params)
 
-				if (action == 'createInvoice' && subject.includes("SUMMARY OF CASH TRANSACTIONS")) {
+				if (action == 'createInvoice' && subject.includes("MONTHLY FEES")) {
 					// var samplefile = file.load({id: 35986}) // for testing
 					// var filename = samplefile.name
 					// var value = samplefile.getContents();
 
-					var strContents = csvreport.getContents(attachment);
+					log.debug('creating Invoice')
+					var strContents = csvreport.getContents(attachment, filename);
 
+					log.debug('strContents',strContents);
 					var objInvoice = csvreport.createInv(strContents);
 					var objToProcess = {};
 

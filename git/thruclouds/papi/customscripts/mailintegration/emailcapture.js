@@ -6,18 +6,19 @@ function process(email) {
 
 		var postData = {};
 
-		for (var i = 0; i < arrFiles.length; i++) {
-			var arrFile = arrFiles[i];
-			postData = {
-				attachment: arrFile.getValue(),
-				filename:arrFile.getName(),
-				action: "createInvoice",
-				author: email.getFrom(),
-				subject: email.getSubject(),
-				body: email.getHtmlBody(),
-			};
-		}
-		if (!arrFiles.length) {
+		if (arrFiles.length) {
+			for (var i = 0; i < arrFiles.length; i++) {
+				var arrFile = arrFiles[i];
+				postData = {
+					attachment: arrFile.getValue(),
+					filename: arrFile.getName(),
+					action: "createInvoice",
+					author: email.getFrom(),
+					subject: email.getSubject(),
+					body: email.getHtmlBody(),
+				};
+			}
+		} else if (!arrFiles.length) {
 			postData = {
 				action: 'nofileCreateInvoice',
 				author: email.getFrom(),
